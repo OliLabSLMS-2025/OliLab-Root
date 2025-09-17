@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "id": "item_1622548800000",
+      "name": "Beaker 250ml",
+      "category": "Chemistry",
+      "totalQuantity": 20,
+      "availableQuantity": 18
+    },
+    {
+      "id": "item_1622548800001",
+      "name": "Test Tube Rack",
+      "category": "Chemistry",
+      "totalQuantity": 15,
+      "availableQuantity": 15
+    },
+    {
+      "id": "item_1622548800002",
+      "name": "Microscope",
+      "category": "Biology",
+      "totalQuantity": 5,
+      "availableQuantity": 3
+    },
+    {
+      "id": "item_1622548800003",
+      "name": "Sulfuric Acid (H2SO4)",
+      "category": "Chemistry",
+      "totalQuantity": 10,
+      "availableQuantity": 10
+    }
+  ],
+  "users": [
+    {
+      "id": "admin_default",
+      "username": "admin",
+      "fullName": "Admin User",
+      "email": "admin@olilab.app",
+      "password": "password",
+      "lrn": "",
+      "gradeLevel": null,
+      "section": null,
+      "role": "Admin",
+      "isAdmin": true,
+      "status": "APPROVED"
+    }
+  ],
+  "logs": [
+    {
+      "id": "log_1622548800002",
+      "userId": "admin_default",
+      "itemId": "item_1622548800002",
+      "quantity": 2,
+      "timestamp": "2024-05-24T12:00:00.000Z",
+      "action": "BORROW",
+      "status": "APPROVED",
+      "returnRequested": false
+    },
+    {
+      "id": "log_1622548800003",
+      "userId": "admin_default",
+      "itemId": "item_1622548800000",
+      "quantity": 2,
+      "timestamp": "2024-05-23T12:00:00.000Z",
+      "action": "BORROW",
+      "status": "APPROVED",
+      "returnRequested": false
+    }
+  ],
+  "notifications": [],
+  "suggestions": [],
+  "comments": []
+}
