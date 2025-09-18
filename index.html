@@ -6,144 +6,79 @@
     <title>OliLab - Science Laboratory Management</title>
     <!-- Link to the compiled Tailwind CSS file -->
     <link href="/dist/output.css" rel="stylesheet" />
-    <style>
-      /* For a more modern scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1e293b;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: #475569;
-        border-radius: 10px;
-        border: 2px solid #1e293b;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: #64748b;
-      }
-
-      /* Print Styles */
-      @media print {
-        body {
-          background-color: white !important;
-          color: black !important;
-        }
-        .sidebar-print-hide, .button-print-hide {
-          display: none !important;
-        }
-        .main-content-print {
-          margin-left: 0 !important;
-          width: 100% !important;
-          min-height: auto !important;
-          background-color: white !important;
-        }
-        .print-text-black {
-            color: black !important;
-        }
-        .print-bg-white {
-            background-color: white !important;
-            border: 1px solid #ccc !important;
-        }
-        .prose-invert {
-            color: black !important;
-        }
-        .prose-invert h1, .prose-invert h2, .prose-invert h3, .prose-invert p, .prose-invert li {
-            color: black !important;
-        }
-
-        /* QR Code Specific Print Styles */
-        body.printing-qr #root > div {
-            display: none;
-        }
-        body.printing-qr .qr-modal-print-container {
-            display: flex !important;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: white;
-            z-index: 9999;
-        }
-      }
-
-      /* Hidden container for QR code printing */
-      .qr-modal-print-container {
-          display: none;
-      }
-    </style>
-  
-    <!-- Load Sucrase transpiler globally -->
-    <script src="https://unpkg.com/sucrase@3.35.0/dist/index.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 17 7"/><path d="M22 2 7 17"/><path d="M15 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M9 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>'>
     
-    <!-- Configure es-module-shims to use Sucrase for .ts/.tsx files -->
-    <script>
-      window.esmsInitOptions = {
-        async fetch(url, options) {
-          const resourceUrl = url.toString();
-          const isTsx = resourceUrl.endsWith('.tsx') || resourceUrl.endsWith('.ts');
-
-          if (isTsx) {
-            const response = await fetch(url, options);
-            if (!response.ok) return response;
-            const code = await response.text();
-
-            // Defensive check: if the server returns index.html for a script, don't try to parse it.
-            if (code.trim().startsWith('<!DOCTYPE html>')) {
-              console.error(`Failed to fetch script: ${url}. Received HTML instead.`);
-              return new Response(`console.error("Failed to load module: ${url}");`, {
-                headers: { 'Content-Type': 'application/javascript' },
-              });
-            }
-            
-            // Use the global `sucrase` object to transform the code
-            const transformedCode = window.sucrase.transform(code, {
-              transforms: ['typescript', 'jsx'],
-              production: true, // Important for React performance
-              // Explicitly set the classic JSX runtime to avoid issues with module resolution.
-              // This ensures JSX is compiled to `React.createElement` calls.
-              jsxRuntime: 'classic',
-            }).code;
-            
-            return new Response(transformedCode, {
-              headers: { 'Content-Type': 'application/javascript' },
-            });
-          }
-
-          return fetch(url, options); // Use default fetch for all other files
-        }
-      };
-    </script>
-    
-    <!-- ES Module Shims for import maps -->
-    <script src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+    <!-- ES Module Shims: Import maps polyfill for browsers -->
+    <script src="https://unpkg.com/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
 
     <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.3.1",
     "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.25.1",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.24.0",
     "recharts": "https://esm.sh/recharts@2.12.7",
-    "@google/genai": "https://esm.sh/@google/genai@0.14.0",
+    "@google/genai": "https://esm.sh/@google/generative-ai@0.14.1",
     "html5-qrcode": "https://esm.sh/html5-qrcode@2.3.8",
-    "qrcode": "https://esm.sh/qrcode@1.5.3"
+    "qrcode": "https://esm.sh/qrcode@1.5.3",
+    "sucrase/dist/index": "https://esm.sh/sucrase@3.35.0/dist/index.js",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
   }
 }
 </script>
-
-    <!-- App entry point -->
-    <script type="module-shim" src="./index.tsx"></script>
-  <link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <div id="qr-print-area" class="qr-modal-print-container"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <!-- This div is a print-only area for QR codes -->
+    <div id="qr-print-area"></div>
+    <script type="module-shim">
+      import { registerTransforms } from 'https://esm.sh/sucrase@3.35.0/dist/index.js';
+      registerTransforms(['tsx']);
+
+      // A simple fetch-based loader for Sucrase
+      window.fetch_and_transform = async (url) => {
+        const res = await fetch(url);
+        const text = await res.text();
+        const { transform } = await import('sucrase/dist/index');
+        const result = transform(text, {
+          transforms: ["typescript", "jsx"],
+          jsxPragma: "React.createElement",
+          jsxFragmentPragma: "React.Fragment",
+        });
+        return {
+          code: result.code,
+          map: result.sourceMap,
+        };
+      };
+    </script>
+    <script type="module-shim" src="./index.tsx"></script>
+    
+    <!-- CSS for printing -->
+    <style type="text/css" media="print">
+      @page {
+        size: auto;
+        margin: 0;
+      }
+      body.printing-qr .sidebar-print-hide,
+      body.printing-qr .main-content-print,
+      body.printing-qr .button-print-hide {
+        display: none !important;
+      }
+      body.printing-qr #qr-print-area {
+        display: block !important;
+      }
+      #qr-print-area {
+        display: none;
+      }
+      .print-bg-white {
+         background-color: white !important;
+      }
+      .print-text-black {
+          color: black !important;
+      }
+    </style>
+  </body>
 </html>
