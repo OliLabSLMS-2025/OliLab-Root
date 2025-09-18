@@ -3,7 +3,7 @@ import { State, Item, User, LogEntry, Notification, Suggestion, Comment, LogActi
 // The base URL of your Python Flask backend
 // Dynamically set the backend URL based on the hostname.
 // This allows the app to be accessed from other devices on the same network.
-const BASE_URL = `https://olilab-backend.onrender.com`;
+const BASE_URL = `https://olilab-backend.onrender.com/api`;
 
 // --- Helper for API Calls ---
 const apiFetch = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
