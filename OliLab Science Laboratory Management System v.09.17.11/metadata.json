@@ -1,7 +1,0 @@
-{
-  "name": "OliLab - Science Laboratory Management System v.09.05.8",
-  "description": "A comprehensive Science Laboratory Management System. Track items, manage borrowers, and maintain a detailed log of all activities to ensure accountability and efficient lab operations.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}
