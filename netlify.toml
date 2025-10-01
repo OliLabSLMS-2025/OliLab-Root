@@ -1,0 +1,22 @@
+# Netlify configuration for deploying the Vite-based React frontend.
+
+# Build settings
+[build]
+  # This command is run to build the site. It corresponds to the "build" script
+  # in package.json, which first runs the TypeScript compiler (tsc) for type
+  # checking and then uses Vite to bundle the application for production.
+  command = "npm run build"
+  
+  # The directory that contains the deploy-ready assets. Vite's default output
+  # directory is "dist".
+  publish = "dist"
+
+# Redirects and rewrites rules
+# This rule is essential for Single Page Applications (SPAs) like this one.
+# It ensures that any direct navigation to a client-side route (e.g., /inventory, /users)
+# that isn't a static file is redirected to the main index.html file, allowing
+# React Router to handle the routing on the client side.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

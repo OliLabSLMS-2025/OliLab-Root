@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OliLab - Science Laboratory Management</title>
+    <!-- Favicon -->
+    <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 17 7"/><path d="M22 2 7 17"/><path d="M15 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M9 15a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>'>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- This div is a print-only area for QR codes -->
+    <div id="qr-print-area"></div>
+    <script type="module" src="/index.tsx"></script>
+    
+    <!-- CSS for printing -->
+    <style type="text/css" media="print">
+      @page {
+        size: auto;
+        margin: 0;
+      }
+      body.printing-qr .sidebar-print-hide,
+      body.printing-qr .main-content-print,
+      body.printing-qr .button-print-hide {
+        display: none !important;
+      }
+      body.printing-qr #qr-print-area {
+        display: block !important;
+      }
+      #qr-print-area {
+        display: none;
+      }
+      .print-bg-white {
+         background-color: white !important;
+      }
+      .print-text-black {
+          color: black !important;
+      }
+    </style>
+  </body>
+</html>

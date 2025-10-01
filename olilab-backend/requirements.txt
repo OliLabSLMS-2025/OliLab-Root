@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+Flask-Bcrypt
+gunicorn
+google-generativeai
+python-dotenv
